@@ -11,7 +11,7 @@
 .tmp/
 *.sass-cache/
 
-# Ignore Node and Bower
+# Ignore Node modules and Bower components
 node_modules/
 bower_components/
 
