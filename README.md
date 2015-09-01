@@ -1,10 +1,9 @@
-# css-scaffold-gulp
+# A css-scaffold and Gulp framework
 A gulp, inuitcss and css-scaffold development environment
 
 ## Description
-A framework using [Inuitcss](https://github.com/inuitcss), the css structure [CSS Scaffold](https://github.com/csshugs/css-scaffold) and Gulp.
+A framework using the css file structure [css-scaffold](https://github.com/csshugs/css-scaffold), the css architecture [Inuitcss](https://github.com/inuitcss) and [Gulp](http://gulpjs.com/).
 
 ## Requirements
-- [Node.js](http://nodejs.org/).
-- [Gulp](http://gulpjs.com/).
-- [Bower](http://bower.io/).
+- [Node.js](http://nodejs.org/)
+- [Bower](http://bower.io/)
