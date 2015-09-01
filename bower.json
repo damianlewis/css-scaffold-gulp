@@ -32,7 +32,6 @@
     "inuit-tools-push": "~0.1.0",
     "inuit-tools-widths": "~0.1.4",
     "inuit-widths": "~0.4.2",
-    "inuit-widths-responsive": "~0.2.2",
-    "jquery": "~2.1.4"
+    "inuit-widths-responsive": "~0.2.2"
   }
 }

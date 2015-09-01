@@ -118,7 +118,7 @@ gulp.task('sass:cms', ['sassGlobbing'], function() {
 // Copy Bower dependancies to project vendor folders
 gulp.task('bowerCopy:libs', ['clean:jsVendor'], function() {
     var stream = gulp.src([
-            globalConfig.bower + '/jquery/dist/jquery.js'
+            // globalConfig.bower + '/jquery/dist/jquery.js'
         ])
         .pipe(gulp.dest(globalConfig.source.js + '/vendor/libs'));
     return stream;
