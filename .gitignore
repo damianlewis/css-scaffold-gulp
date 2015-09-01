@@ -15,7 +15,7 @@
 node_modules/
 bower_components/
 
-# Ignore Grunt generated files
+# Ignore Gulp generated files
 public/
 cms/
 source/js/vendor
