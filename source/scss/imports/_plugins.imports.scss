@@ -1,0 +1,7 @@
+///*------------------------------------*\
+//   #PLUGIN IMPORTS
+//\*------------------------------------*/
+
+// Generates sass globbing for project plugin files using gulp-css-globbing.
+
+@import "../plugins/**/*.scss";

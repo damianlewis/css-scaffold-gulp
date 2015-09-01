@@ -1,0 +1,38 @@
+{
+  "name": "css-scaffold-gulp",
+  "version": "1.0.0",
+  "homepage": "https://github.com/damianlewis/css-scaffold-gulp",
+  "authors": [
+    "Damian Lewis <damian@damianlewis.co.uk>"
+  ],
+  "description": "A gulp, inuitcss and css-scaffold development environment",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "inuit-box-sizing": "~0.2.0",
+    "inuit-clearfix": "~0.2.2",
+    "inuit-defaults": "~0.2.3",
+    "inuit-functions": "~0.2.0",
+    "inuit-headings": "~0.3.1",
+    "inuit-headings-trumps": "~0.1.3",
+    "inuit-images": "~0.3.3",
+    "inuit-lists": "~0.1.0",
+    "inuit-mixins": "~0.2.3",
+    "inuit-normalize.css": "inuit-normalize#~3.0.3",
+    "inuit-page": "~0.2.1",
+    "inuit-paragraphs": "~0.1.4",
+    "inuit-print": "~0.0.2",
+    "inuit-reset": "~0.1.1",
+    "inuit-responsive-settings": "~0.1.5",
+    "inuit-responsive-tools": "~0.1.3",
+    "inuit-shared": "~0.1.5",
+    "inuit-smallprint": "~0.2.0",
+    "inuit-spacing": "~0.7.0",
+    "inuit-spacing-responsive": "~0.0.8",
+    "inuit-tools-pull": "~0.1.0",
+    "inuit-tools-push": "~0.1.0",
+    "inuit-tools-widths": "~0.1.4",
+    "inuit-widths": "~0.4.2",
+    "inuit-widths-responsive": "~0.2.2",
+    "jquery": "~2.1.4"
+  }
+}

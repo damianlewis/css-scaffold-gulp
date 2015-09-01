@@ -1,0 +1,31 @@
+# Ignore Vagrant, Ruby, Sublime and PhpStorm settings
+.vagrant/
+.ruby-version
+*.sublime-workspace
+*.sublime-project
+*.idea/
+.idea/
+
+# Ignore all cache, temporary and log files
+*.log
+.tmp/
+*.sass-cache/
+
+# Ignore Node and Bower
+node_modules/
+bower_components/
+
+# Ignore Grunt generated files
+public/
+cms/
+source/js/vendor
+
+# Ignore Perch cores files
+perch/
+
+# Ignore video files
+videos/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
