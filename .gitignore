@@ -20,12 +20,6 @@ public/
 cms/
 source/js/vendor
 
-# Ignore Perch cores files
-perch/
-
-# Ignore video files
-videos/
-
 # Ignore OS files
 .DS_Store
 Thumbs.db
