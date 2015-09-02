@@ -6,6 +6,7 @@
     "email": "damian@damianlewis.co.uk"
   },
   "devDependencies": {
+    "browser-sync": "^2.8.2",
     "del": "^2.0.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-concat": "^2.6.0",
