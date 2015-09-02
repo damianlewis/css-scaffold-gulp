@@ -19,7 +19,7 @@ Setup your options for [Browsersync](http://www.browsersync.io/docs/options):
 proxy: "http://local.dev"
 ```
 
-Run the Gulp tasks:
+Run the default Gulp tasks:
 ```
 $ gulp
 ```
