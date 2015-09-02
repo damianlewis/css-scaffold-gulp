@@ -14,6 +14,7 @@ var globalConfig = {
         js: 'source/js',
         fonts: 'source/fonts',
         img: 'source/img',
+        pages: 'source/pages'
     },
 
     // Reference the public paths.
@@ -138,10 +139,10 @@ gulp.task('bowerCopy:plugins', ['clean:jsVendor'], function() {
 
 // Inject compiles CSS and JS dependancies into HTML
 gulp.task('injector', ['bowerCopy:libs', 'bowerCopy:plugins'], function() {
-//     var stream = gulp.src(globalConfig.source.templates + '/templates/layouts/global.foot.php')
-//         .pipe(plugins.inject(globalConfig.source.js + '/vendor'));
-//         .pipe(gulp.dest(globalConfig.source.templates + '/templates/layouts'));
-//     return stream;
+    var stream = gulp.src(globalConfig.source.pages + '/index.html')
+        .pipe(plugins.inject(gulp.src(globalConfig.source.js + '/vendor', {read: false})))
+        .pipe(gulp.dest(globalConfig.source.pages));
+    return stream;
 });
 
 
