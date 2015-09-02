@@ -1,4 +1,3 @@
-// var requireDir = require('require-dir');
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
@@ -45,15 +44,15 @@ var globalConfig = {
 
 // Cleaning tasks
 gulp.task('clean:public', function() {
-    return del([globalConfig.public.public + '/**/{.*,*,*/*}']);
+    return del([
+        globalConfig.public.img,
+        globalConfig.public.fonts,
+        globalConfig.public.js
+    ]);
 });
 
 gulp.task('clean:jsVendor', function() {
     return del([globalConfig.source.js + '/vendor']);
-});
-
-gulp.task('clean:cms', function() {
-    return del([globalConfig.cms.cms]);
 });
 
 
@@ -62,7 +61,7 @@ gulp.task('clean:cms', function() {
 
 // Compile projects SASS files into single CSS file
 gulp.task('sassGlobbing', function() {
-    var stream = gulp.src(
+    return gulp.src(
         [
             globalConfig.source.scss + '/imports/_tools.imports.scss',
             globalConfig.source.scss + '/imports/_base.imports.scss',
@@ -78,7 +77,6 @@ gulp.task('sassGlobbing', function() {
             }
         }))
         .pipe(gulp.dest(globalConfig.source.scss + '/_IMPORTS'));   
-    return stream;
 });
 
 gulp.task('sass:public', ['sassGlobbing'], function() {
@@ -102,7 +100,7 @@ gulp.task('sass:public', ['sassGlobbing'], function() {
 });
 
 gulp.task('sass:cms', function() {
-    var stream = gulp.src(globalConfig.source.stylesheet)
+    return gulp.src(globalConfig.source.stylesheet)
         .pipe(plugins.sass({
             includePaths: 'bower_components/',
             outputStyle: 'compressed',
@@ -116,9 +114,7 @@ gulp.task('sass:cms', function() {
             ],
         }))
         .pipe(gulp.dest(globalConfig.cms.css))
-    return stream;
 });
-
 
 
 
@@ -158,7 +154,7 @@ gulp.task('injector', ['bowerCopy:libs', 'bowerCopy:plugins'], function() {
 
 // Complile JS vendor files for distribution
 gulp.task('jsVendor', function() {
-    var stream = gulp.src([
+    return gulp.src([
             globalConfig.source.js + '/vendor/libs/*.js',
             globalConfig.source.js + '/vendor/plugins/*.js',
         ])
@@ -167,7 +163,6 @@ gulp.task('jsVendor', function() {
             preserveComments: 'license'
         }))
         .pipe(gulp.dest(globalConfig.cms.js));
-    return stream;
 });
 
 
@@ -175,44 +170,49 @@ gulp.task('jsVendor', function() {
 
 
 // Copying tasks
-gulp.task('copy:public:img', function() {
+gulp.task('copy:public', ['clean:public', 'injector'], function() {
     var stream = gulp.src([
-            globalConfig.source.img + '/**/{.*,*,*/*}'
-        ])
-        .pipe(gulp.dest(globalConfig.public.img));
-    return stream;
-});
-
-gulp.task('copy:public:fonts', function() {
-    var stream = gulp.src([
-            globalConfig.source.fonts + '/**/{.*,*,*/*}'
-        ])
-        .pipe(gulp.dest(globalConfig.public.fonts));
-    return stream;
-});
-
-gulp.task('copy:public:js', function() {
-    var stream = gulp.src([
+            globalConfig.source.img + '/**/{.*,*,*/*}',
+            globalConfig.source.fonts + '/**/{.*,*,*/*}',
             globalConfig.source.js + '/**/{.*,*,*/*}'
-        ])
-        .pipe(gulp.dest(globalConfig.public.js));
-    return stream;
-});
-
-gulp.task('copy:public:pages', function() {
-    var stream = gulp.src([
-            globalConfig.source.pages + '/**/{.*,*,*/*}'
-        ])
+        ], {base: "./source"})
         .pipe(gulp.dest(globalConfig.public.public));
     return stream;
 });
 
-gulp.task('copy:cms:js', function() {
-    var stream = gulp.src([
+gulp.task('copy:public:img', function() {
+    return gulp.src([
+            globalConfig.source.img + '/**/{.*,*,*/*}'
+        ])
+        .pipe(gulp.dest(globalConfig.public.img));
+});
+
+gulp.task('copy:public:fonts', function() {
+    return gulp.src([
+            globalConfig.source.fonts + '/**/{.*,*,*/*}'
+        ])
+        .pipe(gulp.dest(globalConfig.public.fonts));
+});
+
+gulp.task('copy:public:js', function() {
+    return gulp.src([
             globalConfig.source.js + '/**/{.*,*,*/*}'
         ])
         .pipe(gulp.dest(globalConfig.public.js));
-    return stream;
+});
+
+gulp.task('copy:public:pages', function() {
+    return gulp.src([
+            globalConfig.source.pages + '/**/{.*,*,*/*}'
+        ])
+        .pipe(gulp.dest(globalConfig.public.public));
+});
+
+gulp.task('copy:cms:js', function() {
+    return gulp.src([
+            globalConfig.source.js + '/**/{.*,*,*/*}'
+        ])
+        .pipe(gulp.dest(globalConfig.public.js));
 });
 
 
@@ -238,11 +238,11 @@ gulp.task('browser-sync', function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-    gulp.watch(globalConfig.source.scss + '/**/*.scss', ['sass:public']);
-    gulp.watch(globalConfig.source.js + '/**/*.js', ['copy:public:js']);
-    gulp.watch(globalConfig.source.img + '/**/*', ['copy:public:img']);
-    gulp.watch(globalConfig.source.fonts + '/**/*', ['copy:public:fonts']);
-    gulp.watch(globalConfig.source.pages + '/**/*', ['copy:public:pages']);
+    gulp.watch([globalConfig.source.scss + '/**/*.scss', '!' + globalConfig.source.scss + '/_IMPORTS/*.scss'], ['sass:public']);
+    gulp.watch(globalConfig.source.js + '/**/{.*,*,*/*}', ['copy:public:js']);
+    gulp.watch(globalConfig.source.img + '/**/{.*,*,*/*}', ['copy:public:img']);
+    gulp.watch(globalConfig.source.fonts + '/**/{.*,*,*/*}', ['copy:public:fonts']);
+    gulp.watch(globalConfig.source.pages + '/**/{.*,*,*/*}', ['copy:public:pages']);
 });
 
 
@@ -250,8 +250,5 @@ gulp.task('watch', function() {
 
 
 // Tasks
-gulp.task('copy:public', ['copy:public:img', 'copy:public:fonts', 'copy:public:js', 'copy:public:pages']);
-gulp.task('copy:cms', ['copy:cms:js']);
-gulp.task('bowerInject', ['clean:jsVendor', 'bowerCopy:libs', 'bowerCopy:plugins', 'injector']);
-gulp.task('default', ['clean:public', 'browser-sync', 'sass:public', 'bowerInject', 'copy:public', 'watch']);
-gulp.task('cms', ['clean:cms', 'sass:cms', 'jsVendor', 'copy:cms']);
+gulp.task('default', ['browser-sync', 'copy:public', 'sass:public', 'watch']);
+gulp.task('cms', ['sass:cms', 'jsVendor', 'copy:cms']);
